@@ -1,5 +1,6 @@
 package splaytree;
 
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -48,6 +49,19 @@ public class SplayTreeTest {
         tree.add(10);
         tree.add(20);
         tree.add(15);
+        if (!tree.contains(20)) {
+            fail("Error!");
+        }
+    }
+
+    @Test
+    public void testContains2() {
+        System.out.println("contains test 2");
+        SplayTree<Integer> tree = new SplayTree<>();
+        tree.add(10);
+        tree.add(20);
+        tree.add(15);
+        boolean res1 = tree.contains(20);
         if (!tree.contains(20)) {
             fail("Error!");
         }
@@ -198,4 +212,25 @@ public class SplayTreeTest {
         }
     }
 
+    @Test
+    public void randomTest() {
+        System.out.println("Random test");
+        SplayTree<Integer> tree = new SplayTree<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < (int) (Math.random() * 100); i++) {
+            int x = (int) (Math.random() * 100);
+            if (tree.add(x)) {
+                list.add(x);
+            }
+        }
+        for (int i = 0; i < (int) (Math.random() * 100); i++) {
+            int x = (int) (Math.random() * 100);
+            if (tree.remove(x)) {
+                list.remove((Object) x);
+            }
+        }
+        if (!tree.containsAll(list) || !list.containsAll(tree)) {
+            fail("Error!");
+        }
+    }
 }

@@ -12,7 +12,7 @@ import java.util.Stack;
  */
 public class SplayTree<T extends Comparable<T>> implements Set<T> {
 
-    public class Node<T> {
+    private class Node<T> {
 
         private Node<T> left;
         private Node<T> right;
@@ -24,7 +24,7 @@ public class SplayTree<T extends Comparable<T>> implements Set<T> {
         }
     }
 
-    private class SplayTreeIterator implements Iterator<T> {
+    public class SplayTreeIterator implements Iterator<T> {
 
         private final Stack<T> stack;
 
@@ -164,7 +164,13 @@ public class SplayTree<T extends Comparable<T>> implements Set<T> {
         if (root == null || o.getClass() != root.value.getClass()) {
             return false;
         }
-        return find(root, (T) o) != null;
+        Node<T> node = find(root, (T) o);
+        if (node == null) {
+            return false;
+        } else {
+            root = node;
+            return true;
+        }
     }
 
     @Override
